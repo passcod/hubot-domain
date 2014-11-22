@@ -7,4 +7,4 @@ Add hubot-domainr to your Hubots external-scripts.json.
 ## Usage
 After adding the script to your Hubot you’ll have the following command availalbe:
 
-(domainr|dmnr) your_search_string
+hubot (domainr|dmnr) your_search_string
