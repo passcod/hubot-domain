@@ -1,0 +1,28 @@
+{
+  "name": "hubot-domainr",
+  "version": "1.0.0",
+  "description": "Simple Hubot script for checking available domains for a given word using Domainr API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:fiddler/hubot-domainr.git"
+  },
+  "keywords": [
+    "hubot",
+    "domainr",
+    "javascript"
+  ],
+  "author": "Jussi Kaijalainen",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/fiddler/hubot-domainr/issues"
+  },
+  "homepage": "https://github.com/fiddler/hubot-domainr",
+  "dependencies": {
+    "lodash": "^2.4.1",
+    "request": "^2.48.0"
+  }
+}
