@@ -22,7 +22,7 @@ module.exports = function(robot) {
     var request = require('request'),
     _ = require('lodash'),
     client_id = process.env.DOMAINR_CLIENT_ID,
-    api_url = 'https://domainr.com/api/json/search?client_id=' + client_id + ' &q=';
+    api_url = 'https://domainr.com/api/json/search?client_id=' + client_id + '&q=';
 
     robot.respond(/(dmnr|domainr)(.*)/i, function(msg) {
 
@@ -35,7 +35,7 @@ module.exports = function(robot) {
                 var data = JSON.parse(body);
                 var reply = '';
 
-                _.each(body.results, function(result) {
+                _.each(data.results, function(result) {
                     reply += result.domain + ' - ' + result.availability + '\n';
                 });
 
