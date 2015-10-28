@@ -1,14 +1,21 @@
-#Hubot-domainr
-Hubot-domainr is a simple Hubot script that enables your bot to quickly check available domains related to a given word.
+# Hubot-domain
 
-## Installing
-Add hubot-domainr to your Hubots external-scripts.json and install it with:
+_Hubot script that lets your bot quickly check for available domains given a term._
 
-`npm install hubot-domainr --save`
+## Install
 
-You also need to configure DOMAINR_CLIENT_ID environment variable. Check [Domainr API doc](https://github.com/domainr/api) for latest info on the client_id.
+    npm install hubot-domain --save
+
+Then add it to your external-scripts.json file.
+
+    ["hubot-domain"]
+
+You'll also need a [Mashape](https://mashape.com) API key:
+
+    HUBOT_MASHAPE_KEY=abcdefghijklmnopqrstuvwxyz0123456789
 
 ## Usage
+
 After adding the script to your Hubot you’ll have the following command available:
 
-hubot (domainr|dmnr) your_search_string
+   hubot domain [me] search_term
