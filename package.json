@@ -1,27 +1,25 @@
 {
-  "name": "hubot-domainr",
-  "version": "1.0.2",
-  "description": "Simple Hubot script for checking available domains for a given word using Domainr API",
+  "name": "hubot-domain",
+  "version": "2.0.0-pre.0",
+  "description": "Check available domains for a given term using Hubot",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
-    "url": "git@github.com:fiddler/hubot-domainr.git"
+    "url": "git@github.com:passcod/hubot-domain.git"
   },
   "keywords": [
     "hubot",
+    "domain",
+    "domains",
     "domainr"
   ],
-  "author": "Jussi Kaijalainen",
-  "license": "WTFPL",
+  "author": "Félix Saparelli <me@passcod.name>",
+  "license": "CC0-1.0",
   "bugs": {
-    "url": "https://github.com/fiddler/hubot-domainr/issues"
+    "url": "https://github.com/passcod/hubot-domain/issues"
   },
-  "homepage": "https://github.com/fiddler/hubot-domainr",
+  "homepage": "https://github.com/passcod/hubot-domain",
   "dependencies": {
-    "lodash": "^2.4.1",
-    "request": "^2.48.0"
+    "request": "^2.65.0"
   }
 }
