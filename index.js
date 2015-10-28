@@ -37,7 +37,7 @@ function symbolize (availability) {
 
 module.exports = function (robot) {
     robot.respond(/domain(?: me)?(?: (.*))/i, function (msg) {
-        const search_term =  msg.match[2].trim()
+        const search_term =  msg.match[1].trim()
         request(api_url + search_term, function (error, response, body) {
             if (!error && response.statusCode === 200) {
                 const data = JSON.parse(body)
