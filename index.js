@@ -1,21 +1,19 @@
 'use strict'
 // Description:
-//   Your bot learns to use the Domainr API to check available domains related to a given word.
+//   Use the Domainr API to check for available domains given a term.
 //
 // Dependencies:
-//   "request" : "^2.4.1",
-//   "lodash" : "^2.48.0"
+//   "request" : "^2.65.0",
 //
 // Configuration:
 //   HUBOT_MASHAPE_KEY - Your Mashape API key for Domainr
 //
 // Commands:
-//   hubot domain [me] your_search_word - Search for a domain or domain hack
+//   hubot domain [me] search_term - Search for a domain or domain hack
 //
 // Author:
 //   passcod
 
-const _ = require('lodash')
 const request = require('request')
 
 const api_key = process.env.HUBOT_MASHAPE_KEY
@@ -43,17 +41,12 @@ module.exports = function (robot) {
         request(api_url + search_term, function (error, response, body) {
             if (!error && response.statusCode === 200) {
                 const data = JSON.parse(body)
-                let reply = ''
-
-                _.each(data.results, function(result) {
-                    reply += `${symbolize(result.availability)} ${result.domain}\n`;
-                });
-
-                msg.reply(reply);
+                const reply = data.results.map(result => `${symbolize(result.availability)} ${result.domain}`)
+                msg.reply(reply.join('\n'))
             } else {
-                msg.reply('Something went wrong. Grep your logs for hubot-domainr to find the ugly details.');
-                console.log('hubot-domainr got the following error: \n', error);
+                msg.reply('Uh-oh. Something went wrong.')
+                console.log('ERR:', 'hubot-domain:', error)
             }
-        });
-    });
-};
+        })
+    })
+}
