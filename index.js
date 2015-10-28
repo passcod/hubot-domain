@@ -6,48 +6,53 @@
 //   "lodash" : "^2.48.0"
 //
 // Configuration:
-//   DOMAINR_CLIENT_ID - Your Domainr API client id, for now can be whatever
+//   HUBOT_MASHAPE_KEY - Your Mashape API key for Domainr
 //
 // Commands:
-//   hubot (domainr|dmnr) your_search_word - Query Domainr API for the given word
-//
-// Notes:
-//   In the future you might have to actually register for the Domainr API client_id on their site.
+//   hubot domain [me] your_search_word - Search for a domain or domain hack
 //
 // Author:
-//   fiddler
+//   passcod
 
-module.exports = function(robot) {
+const _ = require('lodash')
+const request = require('request')
 
-    var request = require('request'),
-    _ = require('lodash'),
-    client_id = process.env.DOMAINR_CLIENT_ID,
-    api_url = 'https://domainr.com/api/json/search?client_id=' + client_id + '&q=';
+const api_key = process.env.HUBOT_MASHAPE_KEY
+const api_url = `https://domainr.p.mashape.com/v1/search/?mashape-key=${api_key}&q=`
 
-    robot.respond(/(dmnr|domainr)(.*)/i, function(msg) {
+const symbols = {
+    available: '✓',
+    taken: '✗',
+    maybe: '❓'
+}
 
-        var search_term =  msg.match[2].trim();
+const avails = Object.keys(symbols)
 
+function symbolize (availability) {
+    if (avails.indexOf(availability) === -1) {
+        availability = 'maybe'
+    }
+
+    return symbols[availability]
+}
+
+module.exports = function (robot) {
+    robot.respond(/domain(?: me)?(?: (.*))/i, function (msg) {
+        const search_term =  msg.match[2].trim()
         request(api_url + search_term, function (error, response, body) {
-
-            if(!error && response.statusCode == 200) {
-
-                var data = JSON.parse(body);
-                var reply = '';
+            if (!error && response.statusCode === 200) {
+                const data = JSON.parse(body)
+                let reply = ''
 
                 _.each(data.results, function(result) {
-                    reply += result.domain + ' - ' + result.availability + '\n';
+                    reply += `${symbolize(result.availability)} ${result.domain}\n`;
                 });
 
                 msg.reply(reply);
-
             } else {
-
                 msg.reply('Something went wrong. Grep your logs for hubot-domainr to find the ugly details.');
                 console.log('hubot-domainr got the following error: \n', error);
-
             }
         });
     });
 };
-
