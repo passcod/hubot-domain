@@ -22,7 +22,7 @@ const api_url = `https://domainr.p.mashape.com/v1/search/?mashape-key=${api_key}
 const symbols = {
     available: '✓',
     taken: '✗',
-    maybe: '❓'
+    maybe: '?'
 }
 
 const avails = Object.keys(symbols)
@@ -42,9 +42,9 @@ module.exports = function (robot) {
             if (!error && response.statusCode === 200) {
                 const data = JSON.parse(body)
                 const reply = data.results.map(result => `${symbolize(result.availability)} ${result.domain}`)
-                msg.reply(reply.join('\n'))
+                msg.send(reply.join('\n'))
             } else {
-                msg.reply('Uh-oh. Something went wrong.')
+                msg.send('Uh-oh. Something went wrong.')
                 console.log('ERR:', 'hubot-domain:', error)
             }
         })
