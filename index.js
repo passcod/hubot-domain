@@ -1,3 +1,4 @@
+'use strict'
 // Description:
 //   Your bot learns to use the Domainr API to check available domains related to a given word.
 //
